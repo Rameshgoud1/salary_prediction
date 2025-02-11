@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Price Prediction</title>
+   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function clearForm() {
+            document.getElementById("predictionForm").reset();
+            document.getElementById("predictionOutput").innerHTML = "";
+            document.getElementById('gender').selectedIndex=-1;
+            document.getElementById('education_level').selectedIndex=-1;
+            document.getElementById('job_title').selectedIndex=-1;
+        }
+    </script>
+</head>
+<body>
+    
+    <div class="container">
+        <h2>Salary Price Prediction</h2>
+        
+        <form id="predictionForm" action="/predict" method="post">
+            <label for="age">Age:</label>
+            <input type="text" id="age" name="age" required>
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+
+            <label for="education_level">Education Level:</label>
+            <select id="education_level" name="education_level" required>
+                <option value="High School">High School</option>
+                <option value="Bachelor's">Bachelor's</option>
+                <option value="Master's">Master's</option>
+                <option value="PhD">PhD</option>
+            </select>
+
+            <label for="job_title">Job Title:</label>
+            <select id="job_title" name="job_title" required>
+                <option value="Engineer">Engineer</option>
+                <option value="Manager">Manager</option>
+                <option value="Analyst">Analyst</option>
+                <option value="Sales">Sales</option>
+                <option value="HR">HR</option>
+            </select>
+
+            <label for="years_experience">Years of Experience:</label>
+            <input type="number" id="years_experience" name="years_experience" required>
+
+            <div class="buttons">
+                <button type="submit" class="predict-btn">Predict</button>
+                <button type="button" class="clear-btn" onclick="clearForm()">Clear</button>
+            </div>
+        </form>
+
+        <div class="output" id="predictionOutput">
+            {{ prediction_text }}
+        </div>
+    </div>
+
+</body>
+</html>
+
